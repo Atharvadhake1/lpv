@@ -7,7 +7,12 @@ app.get("/", (req, res) => {
 
     const filePath = path.join(__dirname, "DS.zip");
 
-    res.download(filePath);
+    res.download(filePath, (err) => {
+        if (err) {
+            console.log(err);
+            res.send("ZIP not found");
+        }
+    });
 });
 
 const PORT = process.env.PORT || 3000;
